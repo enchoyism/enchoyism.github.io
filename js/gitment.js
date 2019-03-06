@@ -3707,4 +3707,5 @@ var spinner = exports.spinner = '<svg class="gitment-spinner-icon" xmlns="http:/
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=gitment.browser.js.map</=></=></unnamed></not></unnamed></unnamed>
+//# sourceMappingURL=gitment.browser.js.map
+</=></=></unnamed></not></unnamed></unnamed>
