@@ -80,6 +80,7 @@ theme: vexo
 deploy:
   type: git
   repo: https://github.com/enchoyism/enchoyism.github.io
+  branch: master
 
 nofollow:
   # 플러그인 활성화
