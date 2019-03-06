@@ -24,6 +24,8 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+  <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
   
 
   
@@ -308,8 +310,6 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/bluebird@3.5.1/js/browser/bluebird.core.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.css">
-  <script src="https://cdn.jsdelivr.net/npm/gitment@0.0.3/dist/gitment.browser.js"></script>
   <script>
     var gitmentConfig = "enchoyism";
     if (gitmentConfig !== 'undefined') {
@@ -334,7 +334,7 @@
           }
         }
       })
-      gitment.render('gitment_thread')
+      gitment.render(document.getElementById('comments'))
     }
   </script>
 
