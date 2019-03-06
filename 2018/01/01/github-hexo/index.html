@@ -319,15 +319,15 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/bluebird@3.5.1/js/browser/bluebird.core.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.css">
-    <script src="https://cdn.jsdelivr.net/npm/gitment@0.0.3/dist/gitment.browser.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitment@0.0.3/dist/gitment.browser.js"></script>
   <script>
     var gitmentConfig = "enchoyism";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
         id: "Github + Hexo 웹 페이지 만들기",
         owner: "enchoyism",
-        repo: "enchoyism.github.io",
+        repo: "https://enchoyism.github.io",
         oauth: {
           client_id: "2b670b50b3c7feb1cf7f",
           client_secret: "aae69c2330dd6469e0949b59a12c29b6a15d822f"
@@ -345,7 +345,7 @@
           }
         }
       })
-      gitment.render(document.getElementById('comments'))
+      gitment.render('gitment_thread')
     }
   </script>
 
