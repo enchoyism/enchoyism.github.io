@@ -1,7 +1,7 @@
 ---
 title: Node.js + Telegram 연동하기
 date: 2018-01-11 23:10:50
-tags: [Node.js Telegram]
+tags: [Node.js, Telegram]
 ---
 Node.js와 [Telegram](https://core.telegram.org/) Bot API를 이용하여 메시지를 전달하는 간단한 방법을 소개한다. [Telegram Messenger](https://telegram.org/) 설치가 선행되어야 한다.
 
