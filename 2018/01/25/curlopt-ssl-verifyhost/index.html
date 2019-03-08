@@ -163,7 +163,8 @@
 
       <p style="margin:20px;"></p>
 
-      <h1 id="cURL-options"><a href="#cURL-options" class="headerlink" title="cURL options"></a>cURL options</h1><table>
+      <h1>cURL options</h1>
+<table>
 <thead>
 <tr>
 <th>Options</th>
@@ -181,13 +182,22 @@
 </tr>
 </tbody>
 </table>
-<h1 id="Before-cURL-Version-lt-7-28-0"><a href="#Before-cURL-Version-lt-7-28-0" class="headerlink" title="Before: cURL Version &lt; 7.28.0"></a>Before: cURL Version &lt; 7.28.0</h1><p><code>libcurl/7.19.7 NSS/3.14.0.0 zlib/1.2.3 libidn/1.18 libssh2/1.4.2</code><br>위와 같이 NSS 라이브러리를 통해 빌드 하였다면 예컨데 다음과 같은 PHP 쓰임새를 보면</p>
+<h1>Before: cURL Version &lt; 7.28.0</h1>
+<p><code>libcurl/7.19.7 NSS/3.14.0.0 zlib/1.2.3 libidn/1.18 libssh2/1.4.2</code><br>
+위와 같이 NSS 라이브러리를 통해 빌드 하였다면 예컨데 다음과 같은 PHP 쓰임새를 보면</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"> <span class="comment">// create curl resource</span></span><br><span class="line"> $ch = curl_init();</span><br><span class="line"></span><br><span class="line"> <span class="comment">// set url</span></span><br><span class="line"> curl_setopt($ch, CURLOPT_URL, “example.com”);</span><br><span class="line"></span><br><span class="line"> <span class="comment">//return the transfer as a string</span></span><br><span class="line"> curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"> <span class="comment">// stop cURL from verifying the peer’s certificate</span></span><br><span class="line"> curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, <span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line"> <span class="comment">// $output contains the output string</span></span><br><span class="line"> $output = curl_exec($ch);</span><br><span class="line"></span><br><span class="line"> <span class="comment">// close curl resource to free up system resources</span></span><br><span class="line"> curl_close($ch);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>peer의 인증서를 확인 하지 않는다는 옵션 0 (CURLOPT_SSL_VERIFYPEER) 일때<br><code>CURLOPT_SSL_VERIFYHOST - verify the certificate&#39;s name against host</code>의 옵션은 DEFAULT=0이다.</p>
-<h1 id="After-cURL-Version-gt-7-28-0"><a href="#After-cURL-Version-gt-7-28-0" class="headerlink" title="After: cURL Version &gt;= 7.28.0"></a>After: cURL Version &gt;= 7.28.0</h1><p><code>libcurl/7.46.0 OpenSSL/1.0.2k zlib/1.2.3 nghttp2/1.6.0</code></p>
-<p>7.28.0 이후부터는 빌드시 NSS 라이브러리를 사용하지 않는데, 이때 CURLOPT_SSL_VERIFYHOST 의 옵션은 DEFAULT=2이다.<br>따라서 기존처럼 사용시 http code가 000으로 리턴되고 <strong>SSL: no alternative certificate subject name matches target host name</strong> 와 같은<br>에러 메시지로 정상동작하지 않는다면 반드시 CURLOPT_SSL_VERIFYPEER 옵션 명시할 것을 검토하여야 한다.<br>인증서 검증시 정상이거나 OS가 내장하고 있는 번들인증서가 최신이라면 오류날 가능성이 적으므로, 오류가 나지 않을 수도 있어, 반드시 테스트를 해봐야 정확히 파악이 가능하다.</p>
-<p>CURLOPT_SSL_VERIFYPEER, CURLOPT_SSL_VERIFYHOST 두 값을 false로 명시하는것은 사실 보안상 좋진 않지만<br>장애가 날 경우를 대비하는 관점에서 명시하여 사용하는게 좋을 수 있다.</p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<p>peer의 인증서를 확인 하지 않는다는 옵션 0 (CURLOPT_SSL_VERIFYPEER) 일때<br>
+<code>CURLOPT_SSL_VERIFYHOST - verify the certificate's name against host</code>의 옵션은 DEFAULT=0이다.</p>
+<h1>After: cURL Version &gt;= 7.28.0</h1>
+<p><code>libcurl/7.46.0 OpenSSL/1.0.2k zlib/1.2.3 nghttp2/1.6.0</code></p>
+<p>7.28.0 이후부터는 빌드시 NSS 라이브러리를 사용하지 않는데, 이때 CURLOPT_SSL_VERIFYHOST 의 옵션은 DEFAULT=2이다.<br>
+따라서 기존처럼 사용시 http code가 000으로 리턴되고 <strong>SSL: no alternative certificate subject name matches target host name</strong> 와 같은<br>
+에러 메시지로 정상동작하지 않는다면 반드시 CURLOPT_SSL_VERIFYPEER 옵션 명시할 것을 검토하여야 한다.<br>
+인증서 검증시 정상이거나 OS가 내장하고 있는 번들인증서가 최신이라면 오류날 가능성이 적으므로, 오류가 나지 않을 수도 있어, 반드시 테스트를 해봐야 정확히 파악이 가능하다.</p>
+<p>CURLOPT_SSL_VERIFYPEER, CURLOPT_SSL_VERIFYHOST 두 값을 false로 명시하는것은 사실 보안상 좋진 않지만<br>
+장애가 날 경우를 대비하는 관점에서 명시하여 사용하는게 좋을 수 있다.</p>
+<h1>Reference</h1>
+<ul>
 <li><a href="https://curl.haxx.se/libcurl/c/CURLOPT_SSL_VERIFYHOST.html" rel="external nofollow noopener noreferrer" target="_blank">https://curl.haxx.se/libcurl/c/CURLOPT_SSL_VERIFYHOST.html</a></li>
 </ul>
 
@@ -259,7 +269,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#cURL-options"><span class="toc-nav-text">cURL options</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Before-cURL-Version-lt-7-28-0"><span class="toc-nav-text">Before: cURL Version &lt; 7.28.0</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#After-cURL-Version-gt-7-28-0"><span class="toc-nav-text">After: cURL Version &gt;= 7.28.0</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-text">Reference</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">cURL options</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">Before: cURL Version &lt; 7.28.0</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">After: cURL Version &gt;= 7.28.0</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">Reference</span></a></li></ol>
     
   </div>
 </aside>
