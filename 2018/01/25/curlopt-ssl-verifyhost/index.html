@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+  (adsbygoogle = window.adsbygoogle || []).push({google_ad_client: "ca-pub-6421883889726336",enable_page_level_ads: true});
+  </script>
+  <link rel="canonical" href="https://enchoyism.github.io/2018/01/25/curlopt-ssl-verifyhost/">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="ENCHOYI DEVLOG">
+  <meta name="keyword" content>
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      CURLOPT_SSL_VERIFYHOST explained | ENCHOYI
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="/css/plugins/gitment.css" rel="stylesheet" type="text/css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+
+  <script type="text/javascript" src="https://rawgit.com/yanm1ng/hexo-theme-vexo/master/source/js/gitment.js"></script>
+
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span><strong>ENCHOYI</strong></span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link"><strong>Home</strong></a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link"><strong>Tags</strong></a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link"><strong>Archives</strong></a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link"><strong>Projects</strong></a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link"><strong>About</strong></a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>CURLOPT_SSL_VERIFYHOST explained</h2>
+  <p class="post-date">2018-01-25</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content">
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Adsense -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6421883889726336" data-ad-slot="3078042379" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      <p style="margin:20px;"></p>
+
+      <h1 id="cURL-options"><a href="#cURL-options" class="headerlink" title="cURL options"></a>cURL options</h1><table>
+<thead>
+<tr>
+<th>Options</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CURLOPT_SSL_VERIFYPEER</td>
+<td>FALSE to stop cURL from verifying the peer’s certificate. Alternate certificates to verify against can be specified with the CURLOPT_CAINFO option or a certificate directory can be specified with the CURLOPT_CAPATH option.</td>
+</tr>
+<tr>
+<td>CURLOPT_SSL_VERIFYHOST</td>
+<td>1 to check the existence of a common name in the SSL peer certificate. 2 to check the existence of a common name and also verify that it matches the hostname provided. 0 to not check the names. In production environments the value of this option should be kept at 2 (default value).</td>
+</tr>
+</tbody>
+</table>
+<h1 id="Before-cURL-Version-lt-7-28-0"><a href="#Before-cURL-Version-lt-7-28-0" class="headerlink" title="Before: cURL Version &lt; 7.28.0"></a>Before: cURL Version &lt; 7.28.0</h1><p><code>libcurl/7.19.7 NSS/3.14.0.0 zlib/1.2.3 libidn/1.18 libssh2/1.4.2</code><br>위와 같이 NSS 라이브러리를 통해 빌드 하였다면 예컨데 다음과 같은 PHP 쓰임새를 보면</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"> <span class="comment">// create curl resource</span></span><br><span class="line"> $ch = curl_init();</span><br><span class="line"></span><br><span class="line"> <span class="comment">// set url</span></span><br><span class="line"> curl_setopt($ch, CURLOPT_URL, “example.com”);</span><br><span class="line"></span><br><span class="line"> <span class="comment">//return the transfer as a string</span></span><br><span class="line"> curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"> <span class="comment">// stop cURL from verifying the peer’s certificate</span></span><br><span class="line"> curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, <span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line"> <span class="comment">// $output contains the output string</span></span><br><span class="line"> $output = curl_exec($ch);</span><br><span class="line"></span><br><span class="line"> <span class="comment">// close curl resource to free up system resources</span></span><br><span class="line"> curl_close($ch);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>peer의 인증서를 확인 하지 않는다는 옵션 0 (CURLOPT_SSL_VERIFYPEER) 일때<br><code>CURLOPT_SSL_VERIFYHOST - verify the certificate&#39;s name against host</code>의 옵션은 DEFAULT=0이다.</p>
+<h1 id="After-cURL-Version-gt-7-28-0"><a href="#After-cURL-Version-gt-7-28-0" class="headerlink" title="After: cURL Version &gt;= 7.28.0"></a>After: cURL Version &gt;= 7.28.0</h1><p><code>libcurl/7.46.0 OpenSSL/1.0.2k zlib/1.2.3 nghttp2/1.6.0</code></p>
+<p>7.28.0 이후부터는 빌드시 NSS 라이브러리를 사용하지 않는데, 이때 CURLOPT_SSL_VERIFYHOST 의 옵션은 DEFAULT=2이다.<br>따라서 기존처럼 사용시 http code가 000으로 리턴되고 <strong>SSL: no alternative certificate subject name matches target host name</strong> 와 같은<br>에러 메시지로 정상동작하지 않는다면 반드시 CURLOPT_SSL_VERIFYPEER 옵션 명시할 것을 검토하여야 한다.<br>인증서 검증시 정상이거나 OS가 내장하고 있는 번들인증서가 최신이라면 오류날 가능성이 적으므로, 오류가 나지 않을 수도 있어, 반드시 테스트를 해봐야 정확히 파악이 가능하다.</p>
+<p>CURLOPT_SSL_VERIFYPEER, CURLOPT_SSL_VERIFYHOST 두 값을 false로 명시하는것은 사실 보안상 좋진 않지만<br>장애가 날 경우를 대비하는 관점에서 명시하여 사용하는게 좋을 수 있다.</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="https://curl.haxx.se/libcurl/c/CURLOPT_SSL_VERIFYHOST.html" rel="external nofollow noopener noreferrer" target="_blank">https://curl.haxx.se/libcurl/c/CURLOPT_SSL_VERIFYHOST.html</a></li>
+</ul>
+
+      <br>
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Adsense -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6421883889726336" data-ad-slot="3078042379" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      <p style="margin:20px;"></p>
+    </section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#cURL">
+    <span class="tag-code">cURL</span>
+  </a>
+
+  <a href="/tags#PHP">
+    <span class="tag-code">PHP</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/01/11/nodejs-telegram/">
+        <span class="nav-arrow">← </span>
+        
+          Node.js + Telegram 연동하기
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#cURL-options"><span class="toc-nav-text">cURL options</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Before-cURL-Version-lt-7-28-0"><span class="toc-nav-text">Before: cURL Version &lt; 7.28.0</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#After-cURL-Version-gt-7-28-0"><span class="toc-nav-text">After: cURL Version &gt;= 7.28.0</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Reference"><span class="toc-nav-text">Reference</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://enchoyism.github.io/2018/01/25/curlopt-ssl-verifyhost/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+  <script>
+    var gitmentConfig = "enchoyism";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "CURLOPT_SSL_VERIFYHOST explained",
+        owner: "enchoyism",
+        repo: "enchoyism.github.io",
+        oauth: {
+          client_id: "2b670b50b3c7feb1cf7f",
+          client_secret: "996050a766f457fa65bb310c4fa463e317b290da"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  </script>
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <div class="app-body" style="margin-top: 0px; padding-top:0px;">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Adsense -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6421883889726336" data-ad-slot="3078042379" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+<footer class="app-footer">
+  <p class="copyright">
+    Proudly powered by <a href="https://hexo.io" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>
+    <br>
+    <a href="https://enchoyism.github.io/sitemap.xml" target="_blank">Sitemap</a>
+    <a href="https://enchoyism.github.io/rss2.xml" target="_blank">RSS2</a>
+    &copy; 2019 enchoyism
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>

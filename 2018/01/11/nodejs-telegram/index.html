@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+  (adsbygoogle = window.adsbygoogle || []).push({google_ad_client: "ca-pub-6421883889726336",enable_page_level_ads: true});
+  </script>
+  <link rel="canonical" href="https://enchoyism.github.io/2018/01/11/nodejs-telegram/">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="ENCHOYI DEVLOG">
+  <meta name="keyword" content>
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Node.js + Telegram 연동하기 | ENCHOYI
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="/css/plugins/gitment.css" rel="stylesheet" type="text/css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+
+  <script type="text/javascript" src="https://rawgit.com/yanm1ng/hexo-theme-vexo/master/source/js/gitment.js"></script>
+
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png">
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span><strong>ENCHOYI</strong></span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link"><strong>Home</strong></a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link"><strong>Tags</strong></a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link"><strong>Archives</strong></a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link"><strong>Projects</strong></a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link"><strong>About</strong></a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Node.js + Telegram 연동하기</h2>
+  <p class="post-date">2018-01-11</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content">
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Adsense -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6421883889726336" data-ad-slot="3078042379" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      <p style="margin:20px;"></p>
+
+      <p>Node.js와 <a href="https://core.telegram.org/" rel="external nofollow noopener noreferrer" target="_blank">Telegram</a> Bot API를 이용하여 메시지를 전달하는 간단한 방법을 소개한다. <a href="https://telegram.org/" rel="external nofollow noopener noreferrer" target="_blank">Telegram Messenger</a> 설치가 선행되어야 한다.</p>
+<h1 id="Create-Bot"><a href="#Create-Bot" class="headerlink" title="Create Bot"></a>Create Bot</h1><p><img src="/images/nodejs-telegram-1.png" alt="nodejs-telegram-1"></p>
+<ol>
+<li>@BotFather에게 /start 메시지를 보내어 수행할 수 있는 업무 리스트를 받는다.</li>
+<li>Bot을 생성하기 위해 /newbot 메시지를 보낸다.</li>
+<li>생성할 Bot이름과 Bot이 사용할 username(<strong>bot</strong>으로 끝나야함)을 전달한다.</li>
+<li>위의 과정을 마치면 생성된 Bot에 접근할 수 있는 주소와 <strong>token</strong> 정보를 받게된다. t.me/{username}으로 접근하여 봇과의 채팅을 시작한다.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Done! Congratulations on your new bot.</span><br><span class="line">You will find it at t.me/&#123;username&#125; You can now add a description,</span><br><span class="line">about section and profile picture for your bot,</span><br><span class="line">see /help for a list of commands.</span><br><span class="line">By the way, when you&apos;ve finished creating your cool bot,</span><br><span class="line">ping our Bot Support if you want a better username for it.</span><br><span class="line">Just make sure the bot is fully operational before you do this.</span><br><span class="line"></span><br><span class="line">Use this token to access the HTTP API: &#123;token&#125;</span><br><span class="line"></span><br><span class="line">For a description of the Bot API,</span><br><span class="line">see this page: https://core.telegram.org/bots/api</span><br></pre></td></tr></table></figure>
+<h1 id="Message-push"><a href="#Message-push" class="headerlink" title="Message push"></a>Message push</h1><h2 id="Get-chat-id"><a href="#Get-chat-id" class="headerlink" title="Get chat_id"></a>Get chat_id</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XPOST <span class="string">'https://api.telegram.org/bot&#123;token&#125;/getUpdates'</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"ok"</span>: <span class="literal">true</span>,</span><br><span class="line">	<span class="string">"result"</span>: &#123;</span><br><span class="line">		<span class="string">"message_id"</span>: 11,</span><br><span class="line">		<span class="string">"from"</span>: &#123;</span><br><span class="line">			<span class="string">"id"</span>: &#123;chat_id&#125;,</span><br><span class="line">			<span class="string">"is_bot"</span>: <span class="literal">true</span>,</span><br><span class="line">			<span class="string">"first_name"</span>: 	<span class="string">"&#123;first_name&#125;"</span>,</span><br><span class="line">			<span class="string">"username"</span>: 	<span class="string">"&#123;username&#125;"</span></span><br><span class="line">		&#125;,</span><br><span class="line">	... 이하생략</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Send-message"><a href="#Send-message" class="headerlink" title="Send message"></a>Send message</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ curl -XPOST <span class="string">'https://api.telegram.org/bot&#123;token&#125;/sendmessage'</span> -d <span class="string">'</span></span><br><span class="line"><span class="string">	&amp;chat_id=&#123;chat_id&#125;&amp;text=hello</span></span><br><span class="line"><span class="string">'</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">"ok"</span>: <span class="literal">true</span>,</span><br><span class="line">	<span class="string">"result"</span>: [</span><br><span class="line">		... 이하생략&lt;/span&gt;</span><br><span class="line">	]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Node-js-sample"><a href="#Node-js-sample" class="headerlink" title="Node.js sample"></a>Node.js sample</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> request = <span class="built_in">require</span>(<span class="string">'request'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> send = <span class="function">(<span class="params">text, callback</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> token = <span class="string">'YOUR_TOKEN'</span>;</span><br><span class="line">    <span class="keyword">const</span> chat_id = <span class="string">'YOUR_CHAT_ID'</span>;</span><br><span class="line">    <span class="keyword">const</span> options = &#123;</span><br><span class="line">        url: <span class="string">`https://api.telegram.org/bot<span class="subst">$&#123;token&#125;</span>/sendmessage`</span>,</span><br><span class="line">        form: &#123; <span class="attr">text</span>: text, <span class="attr">chat_id</span>: chat_id &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    request.post(options, (error) =&gt; &#123;</span><br><span class="line">        <span class="keyword">if</span> (error) &#123;</span><br><span class="line">            <span class="keyword">return</span> callback(error);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        callback();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">send(<span class="string">'hello telegram bot'</span>, (error) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">`send error: <span class="subst">$&#123;error&#125;</span>`</span>);</span><br><span class="line">        process.exit(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'send success'</span>);</span><br><span class="line">    process.exit(<span class="number">0</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+      <br>
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Adsense -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6421883889726336" data-ad-slot="3078042379" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+      <p style="margin:20px;"></p>
+    </section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#Node.js Telegram">
+    <span class="tag-code">Node.js Telegram</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/01/02/github-hexo-seo/">
+        <span class="nav-arrow">← </span>
+        
+          Github + Hexo 검색 엔진 최적화(SEO)
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2018/01/25/curlopt-ssl-verifyhost/">
+        
+          CURLOPT_SSL_VERIFYHOST explained
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Create-Bot"><span class="toc-nav-text">Create Bot</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Message-push"><span class="toc-nav-text">Message push</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Get-chat-id"><span class="toc-nav-text">Get chat_id</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Send-message"><span class="toc-nav-text">Send message</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Node-js-sample"><span class="toc-nav-text">Node.js sample</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://enchoyism.github.io/2018/01/11/nodejs-telegram/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+
+
+  <script>
+    var gitmentConfig = "enchoyism";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "Node.js + Telegram 연동하기",
+        owner: "enchoyism",
+        repo: "enchoyism.github.io",
+        oauth: {
+          client_id: "2b670b50b3c7feb1cf7f",
+          client_secret: "996050a766f457fa65bb310c4fa463e317b290da"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  </script>
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <div class="app-body" style="margin-top: 0px; padding-top:0px;">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Adsense -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6421883889726336" data-ad-slot="3078042379" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+<footer class="app-footer">
+  <p class="copyright">
+    Proudly powered by <a href="https://hexo.io" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>
+    <br>
+    <a href="https://enchoyism.github.io/sitemap.xml" target="_blank">Sitemap</a>
+    <a href="https://enchoyism.github.io/rss2.xml" target="_blank">RSS2</a>
+    &copy; 2019 enchoyism
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>
