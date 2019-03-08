@@ -143,8 +143,14 @@
   </div>
 </header>
 
-    <div id="about-banner" style="background-image: url(http://file.muyutech.com/about.jpg)"></div>
-<div class="author">
+    <style>
+.icon-facebook {
+   color:#3b5998;
+}
+</style>
+
+<div id="about-banner" style="background-image: url(http://file.muyutech.com/about.jpg)"></div>
+<div class="author" style="margin-bottom:auto;">
   <div class="head">
     <img src="https://avatars0.githubusercontent.com/u/34962579?s=400&u=96e71366e508f1993fc83287383f162d7f1422f1&v=4">
   </div>
@@ -154,9 +160,16 @@
   
   <section class="share-icons">
     
+      <a class="icon-facebook" href="https://www.facebook.com/profile.php?id=100011789134527" target="_blank" rel="external nofollow noopener noreferrer">
+        <span class="fa-stack fa-2x">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+        </span>
+      </a>
+    
     
       <a class="icon-twitter" href="https://twitter.com/enchoyism" target="_blank" rel="external nofollow noopener noreferrer">
-        <span class="fa-stack fa-lg">
+        <span class="fa-stack fa-2x">
           <i class="fa fa-circle fa-stack-2x"></i>
           <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
         </span>
@@ -164,14 +177,11 @@
     
     
       <a class="icon-github" href="https://github.com/enchoyism" target="_blank" rel="external nofollow noopener noreferrer">
-        <span class="fa-stack fa-lg">
+        <span class="fa-stack fa-2x">
           <i class="fa fa-circle fa-stack-2x"></i>
           <i class="fa fa-github fa-stack-1x fa-inverse"></i>
         </span>
       </a>
-    
-    
-    
     
   </section>
 </div>
@@ -184,7 +194,8 @@
     var bodyH = author.offset().top + author[0].offsetHeight + 71;
     if (bodyH < windowH) {
       author.css({
-        'margin-bottom': windowH - bodyH
+        'margin-bottom': 'auto',
+        'background': 'white'
       })
     }
   })();
@@ -193,7 +204,17 @@
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>
-    <footer class="app-footer">
+    <div class="app-body" style="margin-top: 0px; padding-top:0px;">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Adsense -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6421883889726336" data-ad-slot="3078042379" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+<footer class="app-footer">
   <p class="copyright">
     Proudly powered by <a href="https://hexo.io" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a>
     <br>
