@@ -17,13 +17,6 @@
     </url>
 
     <url>
-        <loc>https://enchoyism.github.io/tags/Node-js-Telegram/</loc>
-        <lastmod>2019-03-08T14:33:30.699Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://enchoyism.github.io/tags/cURL/</loc>
         <lastmod>2019-03-08T14:53:00.210Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -38,15 +31,22 @@
     </url>
 
     <url>
-        <loc>https://enchoyism.github.io/tags/Node-js/</loc>
+        <loc>https://enchoyism.github.io/tags/MySQL/</loc>
         <lastmod>2019-03-08T15:05:21.595Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://enchoyism.github.io/tags/MySQL/</loc>
-        <lastmod>2019-03-08T15:05:21.595Z</lastmod>
+        <loc>https://enchoyism.github.io/tags/Node-js/</loc>
+        <lastmod>2019-03-08T15:47:06.692Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://enchoyism.github.io/tags/Telegram/</loc>
+        <lastmod>2019-03-08T15:47:06.692Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

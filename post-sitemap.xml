@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>https://enchoyism.github.io/2018/01/11/nodejs-telegram/</loc>
+        <lastmod>2019-03-08T15:47:06.692Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://enchoyism.github.io/2018/02/02/nodejs-mysql-connection-lost/</loc>
         <lastmod>2019-03-08T15:05:21.595Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -18,14 +26,6 @@
     <url>
         <loc>https://enchoyism.github.io/2018/01/25/curlopt-ssl-verifyhost/</loc>
         <lastmod>2019-03-08T14:53:00.210Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://enchoyism.github.io/2018/01/11/nodejs-telegram/</loc>
-        <lastmod>2019-03-08T14:33:30.699Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
