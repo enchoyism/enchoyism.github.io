@@ -14,7 +14,7 @@
   <script>
   (adsbygoogle = window.adsbygoogle || []).push({google_ad_client: "ca-pub-6421883889726336",enable_page_level_ads: true});
   </script>
-  <link rel="canonical" href="https://enchoyism.github.io/2018/02/02/nodejs-mysql-connection-lost/">
+  <link rel="canonical" href="https://enchoyism.github.io/2019/03/12/macos-iterm2-setting/">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
   <meta name="description" content="ENCHOYI DEVLOG">
@@ -24,7 +24,7 @@
   
   <title>
     
-      Node.js + MySQL Connection lost | ENCHOYI
+      macOS + iTerm2 setting guide (feat zsh) | ENCHOYI
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -153,8 +153,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>Node.js + MySQL Connection lost</h2>
-  <p class="post-date">2018-02-02</p>
+  <h2>macOS + iTerm2 setting guide (feat zsh)</h2>
+  <p class="post-date">2019-03-12</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -172,23 +172,34 @@
 
       <p style="margin:20px;"></p>
 
-      <p><strong>해당 포스트는 Connection Pool을 사용시 release 또는 end등, idle timeout 등의 설정 및 처리가 완벽하다는 전제하에 작성되었다.</strong><br>
-<strong><code>Error: Connection lost: The server closed the connection.</code></strong> Node.js와 MySQL을 이용한 개발 및 운영시 해당 에러를 뱉어내고 죽는 경우가 있다. 다른 언어의 플랫폼 및 프레임워크에서는 해당 사항에 대하여 어떤식으로 해결하고 있는지는 정확히 모르겠으나 적어도 Node.js + MySQL의 경우 구글링을 하여도 근본적인 원인에 대한 자세한 설명보다 이해하지 못하면 미봉책에 가까운 코드만 나열되어 있는 것 같아 문제에 대한 원인과 해결 방법을 기술한다.</p>
-<h1>Node.js</h1>
-<p>먼저 쉽게 찾아 볼 수 있는 해결책에 가까운 코드를 찾아보면 2가지 경우가 있다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Sol 1.</span></span><br><span class="line">‘use strict’;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mysql = <span class="built_in">require</span>(‘mysql’);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> conn;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> createConn = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">	conn = mysql.createConnection(&#123;</span><br><span class="line">		host: ‘localhost’, <span class="attr">user</span>: ‘root’,</span><br><span class="line">		password: ‘p@ssw0rd’, <span class="attr">database</span>: ‘example’</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	conn.connect(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (error) &#123;</span><br><span class="line">			<span class="built_in">console</span>.log(connecting error: <span class="xml"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"subst"</span>&gt;</span>$&#123;error&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span>);</span><br><span class="line">			setTimeout(createConn, <span class="number">2000</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	conn.on(‘error’, (error) =&gt; &#123;</span><br><span class="line">		<span class="keyword">if</span> (error.code === ‘PROTOCOL_CONNECTION_LOST’) &#123;</span><br><span class="line">			<span class="keyword">return</span> createConn();</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">throw</span> error;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">createConn();</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Sol 2.</span></span><br><span class="line">setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line"> 	db.query(‘SELECT <span class="number">1</span>’);</span><br><span class="line">&#125;, <span class="number">5000</span>);</span><br></pre></td></tr></table></figure>
-<p>위의 두가지 경우는 모두 단일 커넥션의 경우이다. 첫번째는 연결이 끊어졌을때 커넥션을 다시 연결하는 경우이고, 두번째는 일정시간동안 쿼리를 날려 커넥션을 강제로 유지하는 방법인데 Connection Pool을 사용한다면 Pool의 커넥션 자원을 모두 처리하기에는 어려움이 있어, 차라리 새로운 Pool을 생성하여 사용하는것이 더 좋다고 생각한다. 하지만 이 마저도 자원 낭비가 되기 때문에 근본적인 해결 방법은 아니라고 생각한다.</p>
-<h1>MySQL(my.cnf)</h1>
-<p><img src="/images/nodejs-mysql-connection-lost-1.png" alt="nodejs-mysql-connection-lost-1"><br>
-먼저 MySQL 또는 MariaDB를 구동후 위와 같이 Variables를 조회 하였을때 해당 문제를 해결하기 위해 주목해야 할 부분은 다음과 같다. <strong><code>interactive_timeout(콘솔 또는 터미널)</code></strong>, <strong><code>wait_timeout()</code></strong> 해당 의미는 모두 활동하지 않는 커넥션을 끊을때까지 서버가 대기하는 시간인데 위 설정의 경우는 3600초로 1시간동안 활동이 없으면 서버가 커넥션을 닫아버린다. 즉, 트래픽이 얼마 없는 서비스이거나 새벽시간대에 주로 에러를 뱉는 경우가 많다. 따라서 my.cnf에서 서비스에 적정한 값으로 수정후 해당 DB 데몬을 재실행 하여야 한다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">… 중략</span><br><span class="line">[mysqld]</span><br><span class="line">wait_timeout            = &#123;적정한 값&#125;</span><br><span class="line">interactive_timeout     = &#123;적정한 값&#125;</span><br><span class="line">… 중략</span><br></pre></td></tr></table></figure>
-<h1>Reference</h1>
-<ul>
-<li><a href="http://www.linuxchannel.net/docs/mysql-timeout.txt" rel="external nofollow noopener noreferrer" target="_blank">http://www.linuxchannel.net/docs/mysql-timeout.txt</a></li>
-<li><a href="https://gist.github.com/hanjong/1205199" rel="external nofollow noopener noreferrer" target="_blank">https://gist.github.com/hanjong/1205199</a></li>
-<li><a href="https://stackoverflow.com/questions/20210522/nodejs-mysql-error-connection-lost-the-server-closed-the-connection" rel="external nofollow noopener noreferrer" target="_blank">https://stackoverflow.com/questions/20210522/nodejs-mysql-error-connection-lost-the-server-closed-the-connection</a></li>
-</ul>
+      <p>macOS 기본 터미널을 대체하는 <strong><a href="https://www.iterm2.com/" rel="external nofollow noopener noreferrer" target="_blank">iTerm2</a></strong> 와 zsh를 이용하여 터미널을 세팅 하고, ls 명령어 사용시 파일 확장자별로 색을 입혀서 출력 시켜보도록 한다. macOS에서 사용되는 ls는 FreeBSD에서 사용되는 다른 버젼의 ls이다. 따라서 GNU ls를 사용하려면 별도로 설치를 해줘야 한다.</p>
+<h1>iTerm2 + zsh</h1>
+<h2>Homebrew 설치</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /usr/bin/ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br></pre></td></tr></table></figure>
+<h2>zsh 설치</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install zsh</span><br></pre></td></tr></table></figure>
+<h2>zsh 설치경로 확인</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">which</span> zsh</span><br></pre></td></tr></table></figure>
+<h2>기본 shell 변경</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo chsh -s $(<span class="built_in">which</span> zsh)</span><br></pre></td></tr></table></figure>
+<h2>oh-my-zsh 설치</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></table></figure>
+<h2>zsh theme 적용 (dracula)</h2>
+<blockquote>
+<p><a href="https://github.com/robbyrussell/oh-my-zsh/wiki/themes" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/robbyrussell/oh-my-zsh/wiki/themes</a><br>
+<a href="https://draculatheme.com/zsh/" rel="external nofollow noopener noreferrer" target="_blank">https://draculatheme.com/zsh/</a></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~/.oh-my-zsh/themes/dracula.zsh-theme 의 경로로 테마 파일 이동.</span><br><span class="line">~/.zshrc =&gt; ZSH_THEME=&quot;&#123;테마&#125;&quot;</span><br></pre></td></tr></table></figure>
+<h1>GNU ls</h1>
+<h2>coreutils 설치</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install coreutils</span><br></pre></td></tr></table></figure>
+<h2>GNU theme clone</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~ &amp;&amp; git clone https://github.com/seebi/dircolors-solarized.git ~/.dircolors-solarized</span><br></pre></td></tr></table></figure>
+<h2>profile 추가 (~/.bash_profile or ~/.zsh_profile)</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alias ls=&apos;gls --color=auto&apos;</span><br><span class="line">alias dir=&apos;gdir --color=auto&apos;</span><br><span class="line">alias grep=&apos;grep --color=auto&apos;</span><br><span class="line">eval $(gdircolors ~/.dircolors-solarized/dircolors.ansi-dark)</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> &#123;~/.bash_profile&#125; OR &#123;~/.zsh_profile&#125;</span><br></pre></td></tr></table></figure>
+<h1>Result</h1>
+<p><img src="/images/macos-iterm2-setting-1.png" alt="macos-iterm2-setting-1"></p>
 
       <br>
       <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -205,12 +216,12 @@
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#Node.js">
-    <span class="tag-code">Node.js</span>
+  <a href="/tags#macOS">
+    <span class="tag-code">macOS</span>
   </a>
 
-  <a href="/tags#MySQL">
-    <span class="tag-code">MySQL</span>
+  <a href="/tags#iTerm2">
+    <span class="tag-code">iTerm2</span>
   </a>
 
       </div>
@@ -221,20 +232,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/01/25/curlopt-ssl-verifyhost/">
+      <a class="nav-left" href="/2018/02/02/nodejs-mysql-connection-lost/">
         <span class="nav-arrow">← </span>
         
-          CURLOPT_SSL_VERIFYHOST explained
+          Node.js + MySQL Connection lost
         
       </a>
     
-    
-      <a class="nav-right" href="/2019/03/12/macos-iterm2-setting/">
-        
-          macOS + iTerm2 setting guide (feat zsh)
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -258,7 +262,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">Node.js</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">MySQL(my.cnf)</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">Reference</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">iTerm2 + zsh</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">Homebrew 설치</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">zsh 설치</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">zsh 설치경로 확인</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">기본 shell 변경</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">oh-my-zsh 설치</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">zsh theme 적용 (dracula)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">GNU ls</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">coreutils 설치</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">GNU theme clone</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">profile 추가 (~/.bash_profile or ~/.zsh_profile)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-text">Result</span></a></li></ol>
     
   </div>
 </aside>
@@ -268,7 +272,7 @@
 
 <script>
   (function () {
-    var url = 'https://enchoyism.github.io/2018/02/02/nodejs-mysql-connection-lost/';
+    var url = 'https://enchoyism.github.io/2019/03/12/macos-iterm2-setting/';
     var banner = ''
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
@@ -323,7 +327,7 @@
     var gitmentConfig = "enchoyism";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "Node.js + MySQL Connection lost",
+        id: "macOS + iTerm2 setting guide (feat zsh)",
         owner: "enchoyism",
         repo: "enchoyism.github.io",
         oauth: {

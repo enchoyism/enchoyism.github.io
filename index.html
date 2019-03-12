@@ -156,6 +156,34 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2019/03/12/macos-iterm2-setting/">macOS + iTerm2 setting guide (feat zsh)</a>
+      </h2>
+      <p class="article-date">March 12, 2019</p>
+      
+        
+  <a href="/tags#macOS">
+    <span class="tag-code">macOS</span>
+  </a>
+
+  <a href="/tags#iTerm2">
+    <span class="tag-code">iTerm2</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          macOS 기본 터미널을 대체하는 iTerm2 와 zsh를 이용하여 터미널을 세팅 하고, ls 명령어 사용시 파일 확장자별로 색을 입혀서 출력 시켜보도록 한다. macOS에서 사용되는 ls는 FreeBSD에서 사용되는 다른 버젼의 ls이다. 따라서 GNU ls를 사용하려면 별도로 설치를 해줘야 한다.
+iTerm2 + zsh
+Homebrew 설치
+1$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+ ...
+        
+      </div>
+      <a class="more" href="/2019/03/12/macos-iterm2-setting/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2018/02/02/nodejs-mysql-connection-lost/">Node.js + MySQL Connection lost</a>
       </h2>
       <p class="article-date">February 2, 2018</p>
@@ -173,7 +201,7 @@
       <div class="article-summary">
         
           해당 포스트는 Connection Pool을 사용시 release 또는 end등, idle timeout 등의 설정 및 처리가 완벽하다는 전제하에 작성되었다.
-Error: Connection lost: The server closed the connection. ...
+Error: Connection lost: The server closed the connection. Node.js와 MySQL을 이용한 개발 및 운영시 해당 에러를 뱉어내고 죽는 경우가 있다. 다른 언어의 플랫폼 및 프레임워크에서는 해당 사항에 대하여 어떤식으로 해결하고 있는지는 정확히 모르겠으나 적어도 Node.js + MySQL의 경우 구글링을 하여도 근본적인  ...
         
       </div>
       <a class="more" href="/2018/02/02/nodejs-mysql-connection-lost/">Read more</a>
@@ -208,7 +236,10 @@ Description
 
 
 CURLOPT_SSL_VERIFYPEER
-FALSE to stop cURL from verifying the peer’s certificate. Alternate certificates to ...
+FALSE to stop cURL from verifying the peer’s certificate. Alternate certificates to verify against can be specified with the CURLOPT_CAINFO option or a certificate directory can be specified with the CURLOPT_CAPATH option.
+
+
+CURLOPT_ ...
         
       </div>
       <a class="more" href="/2018/01/25/curlopt-ssl-verifyhost/">Read more</a>
@@ -236,7 +267,10 @@ FALSE to stop cURL from verifying the peer’s certificate. Alternate certificat
 Create Bot
 
 
-@BotFather에게 /start 메시지를 보내어 수행할 수 있는 업무 리스트 ...
+@BotFather에게 /start 메시지를 보내어 수행할 수 있는 업무 리스트를 받는다.
+Bot을 생성하기 위해 /newbot 메시지를 보낸다.
+생성할 Bot이름과 Bot이 사용할 username(bot으로 끝나야함)을 전달한다.
+위의 과정을 마치면 생성된 Bot에 접근할 수 있는 주소와 token 정보를 받게된다. t.me/{username} ...
         
       </div>
       <a class="more" href="/2018/01/11/nodejs-telegram/">Read more</a>
@@ -264,40 +298,13 @@ Create Bot
 hexo-autonofollow
 각 포스트의 외부 링크에 대해 자동으로 nofollow 속성을 추가 해준다.
 Install &amp; Option
-1$ npm ins ...
+1$ npm install hexo-autonofollow --save
+_config.yml
+1234567nofollow:  # 플러그인 활성화  enable: true  # 제외할 호스트  exclude:    - exclude1.com    - exclude2.com
+hexo-aut ...
         
       </div>
       <a class="more" href="/2018/01/02/github-hexo-seo/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2018/01/01/github-hexo/">Github + Hexo 웹 페이지 만들기</a>
-      </h2>
-      <p class="article-date">January 1, 2018</p>
-      
-        
-  <a href="/tags#Github">
-    <span class="tag-code">Github</span>
-  </a>
-
-  <a href="/tags#Hexo">
-    <span class="tag-code">Hexo</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          Github에서 제공하는 Github Pages라는 호스팅 서비스를 이용하면 개인 웹페이지를 무료로 생성할 수 있다. 생성된 웹페이지에 Hexo framework를 이용하여 테마를 입힌 과정을 기술한다.
-
-준비사항:
-
-Node.js
-Git
-Github Accou ...
-        
-      </div>
-      <a class="more" href="/2018/01/01/github-hexo/">Read more</a>
     </article>
   
 
