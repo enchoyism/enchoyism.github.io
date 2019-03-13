@@ -61,7 +61,7 @@ alias grep='grep --color=auto'
 eval $(gdircolors ~/.dircolors-solarized/dircolors.ansi-dark)
 ```
 ``` bash
-source {~/.bash_profile} OR {~/.zsh_profile}
+$ source {~/.bash_profile} OR {~/.zsh_profile}
 ```
 
 # Result
